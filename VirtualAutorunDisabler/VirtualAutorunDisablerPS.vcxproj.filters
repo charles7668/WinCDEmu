@@ -8,6 +8,9 @@
       <UniqueIdentifier>{43e6a5c3-f86a-47cf-aeba-266b2da8a5c2}</UniqueIdentifier>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Generated Files\NewFilter1">
+      <UniqueIdentifier>{ea51e227-6771-4e26-81cc-b62139ce465f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dlldata.c">

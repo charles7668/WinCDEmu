@@ -22,6 +22,7 @@
     <ProjectGuid>{6F354B58-614B-4B35-B385-DF162D6F7D06}</ProjectGuid>
     <RootNamespace>VirtualAutorunDisabler</RootNamespace>
     <Keyword>AtlProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -38,6 +39,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseOfAtl>Static</UseOfAtl>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -223,6 +225,7 @@
       </DllDataFileName>
       <InterfaceIdentifierFileName>VirtualAutorunDisabler_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>VirtualAutorunDisabler_p64.c</ProxyFileName>
+      <MinimumTargetSystem>NT60</MinimumTargetSystem>
     </Midl>
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -245,8 +248,10 @@
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Message>Performing registration</Message>
-      <Command>"$(TargetPath)" /RegServer</Command>
+      <Message>
+      </Message>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -274,7 +279,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="VirtualAutorunDisabler.idl" />
+    <Midl Include="VirtualAutorunDisabler.idl">
+      <ProxyFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VirtualAutorunDisabler_p64.c</ProxyFileName>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />

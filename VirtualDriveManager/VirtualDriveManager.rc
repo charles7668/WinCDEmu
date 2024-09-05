@@ -25,7 +25,7 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 // DRIVERFILE
 //
 
-32                      DRIVERFILE              "..\\AllModules\\Portable\\BazisPortableCDBus32.sys"
+// 32                      DRIVERFILE              "..\\AllModules\\Portable\\BazisPortableCDBus32.sys"
 64                      DRIVERFILE              "..\\AllModules\\Portable\\BazisPortableCDBus64.sys"
 #endif    // Neutral resources
 /////////////////////////////////////////////////////////////////////////////

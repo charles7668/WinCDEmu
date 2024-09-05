@@ -58,3 +58,5 @@ ipch
 /vmnt/vmnt.lng
 /vmnt/vmnt_lng.cpp
 /vmnt/vmnt_lng.h
+
+.vs

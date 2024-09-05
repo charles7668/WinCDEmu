@@ -69,11 +69,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="WinCDEmuContextMenu.idl">
-      <Filter>Source Files</Filter>
-    </Midl>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="dlldatax.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -112,5 +107,10 @@
     <ResourceCompile Include="WinCDEmuContextMenu.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="WinCDEmuContextMenu.idl">
+      <Filter>Source Files</Filter>
+    </Midl>
   </ItemGroup>
 </Project>
