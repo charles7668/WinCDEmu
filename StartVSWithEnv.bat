@@ -9,7 +9,7 @@ for %%i in ("..\stlport-kernel") do (
 )
 
 echo STLPORT_PATH=%BZSLIB_PATH%
-for %%i in ("..\WTL80_7161_Final") do (
+for %%i in ("..\wtl81_12085") do (
     set WTL_PATH=%%~fi
 )
 
