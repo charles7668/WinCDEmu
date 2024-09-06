@@ -4,11 +4,6 @@ for %%i in ("..\BazisLib") do (
 
 echo BZSLIB_PATH=%BZSLIB_PATH%
 
-for %%i in ("..\stlport-kernel") do (
-    set STLPORT_PATH=%%~fi
-)
-
-echo STLPORT_PATH=%BZSLIB_PATH%
 for %%i in ("..\wtl81_12085") do (
     set WTL_PATH=%%~fi
 )
