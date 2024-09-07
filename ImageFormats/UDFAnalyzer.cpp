@@ -2,6 +2,7 @@
 #include "UDFAnalyzer.h"
 #include "Filesystems/miniudf.h"
 #include <algorithm>
+#include <memory>
 
 using namespace BazisLib;
 using namespace ImageFormats;
@@ -41,7 +42,7 @@ namespace
 
 UDFAnalysisResult AnalyzeUDFImage(const BazisLib::ManagedPointer<ImageFormats::AIParsedCDImage> &pImg)
 {
-	std::auto_ptr<ParsedImageWrapper> pWrapper(new ParsedImageWrapper(pImg, 0));
+	std::unique_ptr<ParsedImageWrapper> pWrapper(new ParsedImageWrapper(pImg, 0));
 	UDFDisc disc(pWrapper.get());
 
 	UDFAnalysisResult result = {false,};
