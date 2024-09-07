@@ -2,6 +2,7 @@
 #include "MDSParser.h"
 #include "MDSFormats.h"
 #include <algorithm>
+#include <list>
 #include <vector>
 #include "../MultiTrackImage.h"
 #include "../RawCDFormats.h"

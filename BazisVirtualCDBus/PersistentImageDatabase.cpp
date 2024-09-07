@@ -37,7 +37,7 @@ String PersistentImageDatabase::AddImage(const wchar_t *pImage, char suggestedDr
 		for (int i = 0; i < 1000; i++)
 		{
 			wchar_t wszSubkey[32];
-			swprintf(wszSubkey, L"%02d", i);
+			swprintf_s(wszSubkey, L"%02d", i);
 			RegistryKey subkey(key, wszSubkey, true);
 			if (subkey.Valid())
 				continue;
