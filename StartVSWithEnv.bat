@@ -18,6 +18,5 @@ echo STL_PORT=%STL_PORT%
 
 set WDKPATH=C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\
 set WDK_LIB_PATH=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\
-set WDK7_PATH=C:\WinDDK\7600.16385.1\
 
 WinCDEmu.sln
