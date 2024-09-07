@@ -24,7 +24,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AE4C0767-F387-48DD-970E-1D143053516A}</ProjectGuid>
     <RootNamespace>BazisPortableCDBus</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -35,10 +35,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -133,21 +134,23 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(WDK7PATH)\inc\ddk;$(WDK7PATH)\inc\api;$(WDK7PATH)\inc\crt;$(BZSLIB_PATH);$(STLPORT_PATH)\stlport;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_CONSOLE;_AMD64_;_DDK_;_DEBUG;WINCDEMU_PORTABLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(VC_VC_IncludePath);$(UniversalCRT_IncludePath);$(BZSLIB_PATH);$(WDKPATH)km;$(WDKPATH)shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32;WIN32;_CONSOLE;_AMD64_;_DDK_;_NDEBUG;WINCDEMU_PORTABLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
       <ExceptionHandling>
       </ExceptionHandling>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>StdCall</CallingConvention>
+      <Optimization>Disabled</Optimization>
+      <AdditionalOptions>/kernel %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntoskrnl.lib;hal.lib;ntstrsafe.lib;ksecdd.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(WDK_LIB_PATH)km\x64\ntoskrnl.lib;$(WDK_LIB_PATH)km\x64\wdmsec.lib;$(WDK_LIB_PATH)km\x64\ksecdd.lib;$(WDK_LIB_PATH)km\x64\hal.lib;$(WDK_LIB_PATH)km\x64\bufferoverflowfastfailk.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).sys</OutputFile>
       <AdditionalLibraryDirectories>$(WDK7PATH)\lib\WIN7\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
@@ -211,7 +214,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>$(VC_VC_IncludePath);$(UniversalCRT_IncludePath);$(WDK7PATH)\inc\ddk;$(WDK7PATH)\inc\api;$(WDK7PATH)\inc\crt;$(BZSLIB_PATH);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VC_VC_IncludePath);$(UniversalCRT_IncludePath);$(BZSLIB_PATH);$(WDKPATH)km;$(WDKPATH)shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32;WIN32;_CONSOLE;_AMD64_;_DDK_;_NDEBUG;WINCDEMU_PORTABLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
       <StringPooling>true</StringPooling>
@@ -224,12 +227,13 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>StdCall</CallingConvention>
+      <AdditionalOptions>/kernel %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vcruntime.lib;ucrt.lib;kernel32.lib;ksecdd.lib;ntoskrnl.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(WDK_LIB_PATH)km\x64\ntoskrnl.lib;$(WDK_LIB_PATH)km\x64\wdmsec.lib;$(WDK_LIB_PATH)km\x64\ksecdd.lib;$(WDK_LIB_PATH)km\x64\hal.lib;$(WDK_LIB_PATH)km\x64\bufferoverflowfastfailk.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName)64.sys</OutputFile>
-      <AdditionalLibraryDirectories>$(VC_LibraryPath_ATL_x64);$(UniversalCRT_LibraryPath_x64);$(WDK7PATH)\lib\WNET\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Native</SubSystem>
       <Driver>Driver</Driver>

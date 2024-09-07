@@ -40,6 +40,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -130,21 +131,22 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(WDK7PATH)\inc\ddk;$(WDK7PATH)\inc\api;$(WDK7PATH)\inc\crt;$(BZSLIB_PATH);$(STLPORT_PATH)\stlport;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_CONSOLE;_AMD64_;_DDK_;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(VC_VC_IncludePath);$(UniversalCRT_IncludePath);$(BZSLIB_PATH);$(WDKPATH)km;$(WDKPATH)shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_HAS_EXCEPTION=0;_NO_CRT_STDIO_INLINE;WIN32;_CONSOLE;_AMD64_;_DDK_;_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
       <ExceptionHandling>
       </ExceptionHandling>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>StdCall</CallingConvention>
+      <AdditionalOptions>/kernel %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntoskrnl.lib;hal.lib;ntstrsafe.lib;wdmsec.lib;BufferOverflowK.lib;ksecdd.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(WDK_LIB_PATH)km\x64\ntoskrnl.lib;$(WDK_LIB_PATH)km\x64\wdmsec.lib;$(WDK_LIB_PATH)km\x64\ksecdd.lib;$(WDK_LIB_PATH)km\x64\hal.lib;$(WDK_LIB_PATH)km\x64\bufferoverflowfastfailk.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).sys</OutputFile>
       <AdditionalLibraryDirectories>$(WDK7PATH)\lib\WNET\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
