@@ -232,6 +232,8 @@ VirtualCDClient::VirtualCDList VirtualCDClient::GetVirtualDiskList(const wchar_t
 	char buf[8192] = {0,};
 
 	ActionStatus status;
+	if (!m_pDevice)
+		return devices;
 	size_t done = m_pDevice->DeviceIoControl(IOCTL_LIST_DEVICES, pFilter, pFilter ? (wcslen(pFilter) + 1) * sizeof(wchar_t) : 0, &buf, sizeof(buf), &status);
 	if (!status.Successful())
 		return devices;
