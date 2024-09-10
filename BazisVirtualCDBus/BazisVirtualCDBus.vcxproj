@@ -46,7 +46,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>NotSet</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+    <TargetVersion>Windows10</TargetVersion>
+    <DriverTargetPlatform>Universal</DriverTargetPlatform>
+    <_NT_TARGET_VERSION>0xA000010</_NT_TARGET_VERSION>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -142,7 +145,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(VC_VC_IncludePath);$(UniversalCRT_IncludePath);$(BZSLIB_PATH);$(WDKPATH)km;$(WDKPATH)shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_HAS_EXCEPTION=0;_NO_CRT_STDIO_INLINE;WIN32;_CONSOLE;_AMD64_;_DDK_;_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CONSOLE;_AMD64_;_DDK_;_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -154,6 +157,8 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>StdCall</CallingConvention>
       <AdditionalOptions>/kernel %(AdditionalOptions)</AdditionalOptions>
+      <UndefinePreprocessorDefinitions>DBG;_DEUBG;</UndefinePreprocessorDefinitions>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <AdditionalDependencies>$(WDK_LIB_PATH)km\x64\ntoskrnl.lib;$(WDK_LIB_PATH)km\x64\wdmsec.lib;$(WDK_LIB_PATH)km\x64\ksecdd.lib;$(WDK_LIB_PATH)km\x64\hal.lib;$(WDK_LIB_PATH)km\x64\bufferoverflowfastfailk.lib</AdditionalDependencies>
@@ -171,8 +176,11 @@
       <AdditionalOptions>/IGNORE:4210 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>$(SIGN_RELEASE_BINARY) $(TargetPath)</Command>
+      <Command>copy $(OutDir)$(ProjectName)\* $(OutDir) /Y</Command>
     </PostBuildEvent>
+    <DriverSign>
+      <FileDigestAlgorithm>SHA256</FileDigestAlgorithm>
+    </DriverSign>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

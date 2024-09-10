@@ -5,4 +5,7 @@
     <TestCertificate>
     </TestCertificate>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <SignMode>TestSign</SignMode>
+  </PropertyGroup>
 </Project>
