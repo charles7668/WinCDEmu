@@ -9,17 +9,11 @@ CatalogFile=BazisVirtualCDBus.cat
 [DestinationDirs]
 DefaultDestDir = 12
 
-[SourceDisksNames.x86]
+[SourceDisksNames]
 1 = %DiskId1%,,,
 
-[SourceDisksNames.amd64]
-1 = %DiskId1%,,,
-
-[SourceDisksFiles.x86]
-BazisVirtualCDBus.sys  = 1,\x86
-
-[SourceDisksFiles.amd64]
-BazisVirtualCDBus.sys  = 1,\x64
+[SourceDisksFiles]
+BazisVirtualCDBus.sys  = 1,,
 
 [Manufacturer]
 %BAZIS%=Standard, NTamd64

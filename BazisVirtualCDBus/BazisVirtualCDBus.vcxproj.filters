@@ -47,4 +47,7 @@
   <ItemGroup>
     <ResourceCompile Include="BazisVirtualCDBus.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Inf Include="BazisVirtualCDBus.inf" />
+  </ItemGroup>
 </Project>

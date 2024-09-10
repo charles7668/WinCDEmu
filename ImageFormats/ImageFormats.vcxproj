@@ -67,7 +67,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+    <TargetVersion>Windows10</TargetVersion>
+    <DriverTargetPlatform>Universal</DriverTargetPlatform>
+    <_NT_TARGET_VERSION>0xA000010</_NT_TARGET_VERSION>
+    <DriverType>KMDF</DriverType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -152,6 +156,9 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <EnableInf2cat>false</EnableInf2cat>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(WDK7PATH)\inc\ddk;$(WDK7PATH)\inc\api;$(WDK7PATH)\inc\crt;$(BZSLIB_PATH);$(STLPORT_PATH)\stlport;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -228,6 +235,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>StdCall</CallingConvention>
       <AdditionalOptions>/kernel %(AdditionalOptions)</AdditionalOptions>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (user-mode)|Win32'">

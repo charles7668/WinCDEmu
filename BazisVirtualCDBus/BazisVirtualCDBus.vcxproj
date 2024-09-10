@@ -36,7 +36,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+    <TargetVersion>Windows10</TargetVersion>
+    <DriverTargetPlatform>Universal</DriverTargetPlatform>
+    <_NT_TARGET_VERSION>0xA000010</_NT_TARGET_VERSION>
+    <DriverType>KMDF</DriverType>
+    <SupportsPackaging>true</SupportsPackaging>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -73,7 +78,7 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)AllModules\drivers\x64</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)AllModules\drivers</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</GenerateManifest>
@@ -93,6 +98,10 @@
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.sys</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.sys</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.sys</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <EnableInf2cat>true</EnableInf2cat>
+    <Inf2CatVerbose>true</Inf2CatVerbose>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -228,6 +237,7 @@ copy /y $(ProjectDir)BazisVirtualCDBus.inf $(TargetDir)\..</Command>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>StdCall</CallingConvention>
       <AdditionalOptions>/kernel %(AdditionalOptions)</AdditionalOptions>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <AdditionalDependencies>$(WDK_LIB_PATH)km\x64\ntoskrnl.lib;$(WDK_LIB_PATH)km\x64\wdmsec.lib;$(WDK_LIB_PATH)km\x64\ksecdd.lib;$(WDK_LIB_PATH)km\x64\hal.lib;$(WDK_LIB_PATH)km\x64\bufferoverflowfastfailk.lib</AdditionalDependencies>
@@ -247,9 +257,15 @@ copy /y $(ProjectDir)BazisVirtualCDBus.inf $(TargetDir)\..</Command>
       <AdditionalOptions>/IGNORE:4210 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>call $(SIGN_RELEASE_BINARY) $(TargetPath)
-copy /y $(ProjectDir)BazisVirtualCDBus.inf $(TargetDir)\..</Command>
+      <Command>copy $(OutDir)$(ProjectName)\* $(OutDir) /Y
+rmdir $(OutDir)$(ProjectName) /S /Q</Command>
     </PostBuildEvent>
+    <DriverSign>
+      <FileDigestAlgorithm>SHA256</FileDigestAlgorithm>
+    </DriverSign>
+    <Inf>
+      <SpecifyArchitecture>false</SpecifyArchitecture>
+    </Inf>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BazisVirtualCDBus.cpp" />
@@ -294,6 +310,12 @@ copy /y $(ProjectDir)BazisVirtualCDBus.inf $(TargetDir)\..</Command>
       <Project>{3f40a297-edf8-4b57-9ac1-ae67bb5c9f38}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <FilesToPackage Include="$(TargetPath)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Inf Include="BazisVirtualCDBus.inf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

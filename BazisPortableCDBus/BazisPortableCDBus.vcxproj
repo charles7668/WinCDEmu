@@ -35,7 +35,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+    <TargetVersion>Windows10</TargetVersion>
+    <DriverTargetPlatform>Universal</DriverTargetPlatform>
+    <_NT_TARGET_VERSION>0xA000010</_NT_TARGET_VERSION>
+    <DriverType>KMDF</DriverType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -228,6 +232,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CallingConvention>StdCall</CallingConvention>
       <AdditionalOptions>/kernel %(AdditionalOptions)</AdditionalOptions>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <AdditionalDependencies>$(WDK_LIB_PATH)km\x64\ntoskrnl.lib;$(WDK_LIB_PATH)km\x64\wdmsec.lib;$(WDK_LIB_PATH)km\x64\ksecdd.lib;$(WDK_LIB_PATH)km\x64\hal.lib;$(WDK_LIB_PATH)km\x64\bufferoverflowfastfailk.lib</AdditionalDependencies>
